@@ -6,7 +6,9 @@ class GamesController < ApplicationController
   end
 
   def show
+    render partial: 'game', locals: { game: @game }
   end
+  
 
   def create
     @game = Game.new(game_params)
@@ -27,6 +29,10 @@ class GamesController < ApplicationController
   def destroy
     @game.destroy
    render json: { message: 'removed' }, status: :ok
+  end
+
+  def form
+    @game = params[:id] ? Game.find(params[:id]) : Game.new
   end
 
   private
